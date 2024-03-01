@@ -1,6 +1,6 @@
 package my.maximilyan.budgetApp.budgetServices;
 
-import org.springframework.stereotype.Service;
+import my.maximilyan.budgetApp.model.Transaction;
 
 
 public interface BudgetService {
@@ -8,6 +8,12 @@ public interface BudgetService {
     int getDailyBudget();
 
     int getBalance();
+
+    long addTransaction(Transaction transaction);
+
+    int getDailyBalance();
+
+    int getAllSpend();
 
     int getVacationBonus(int daysCount);
 

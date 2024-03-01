@@ -36,20 +36,24 @@ public class BudgetServiceImpl implements BudgetService {
         return SALARY - SAVING - getAllSpend();
     }
 
-    public void addTransaction(Transaction transaction) {
+    @Override
+    public long addTransaction(Transaction transaction) {
         /*Если на момент вызова метода Treemap transactions пуста,
         благодаря методу getOrDefault() создается новая транзакция.
         LinkedHashMap<>() выбрана из-за упорядоченности данных
          */
         Map<Long, Transaction> monthTransactions = transactions.getOrDefault(LocalDate.now().getMonth(), new LinkedHashMap<>());
-        monthTransactions.put(lastId++, transaction);
+        monthTransactions.put(lastId, transaction);
+        return lastId++;
     }
 
+    @Override
     public int getDailyBalance() {
         return DAILY_BUDGET * LocalDate.now().getDayOfMonth() - getAllSpend();
     }
 
-    private int getAllSpend() {
+    @Override
+    public int getAllSpend() {
         Map<Long, Transaction> monthTransactions = transactions.getOrDefault(LocalDate.now().getMonth(), new LinkedHashMap<>());
         int sum = 0;
         for (Transaction transactions : monthTransactions.values()) {
