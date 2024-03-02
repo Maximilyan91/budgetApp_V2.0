@@ -11,6 +11,8 @@ public interface BudgetService {
 
     long addTransaction(Transaction transaction);
 
+    Transaction getTransaction(long id);
+
     int getDailyBalance();
 
     int getAllSpend();

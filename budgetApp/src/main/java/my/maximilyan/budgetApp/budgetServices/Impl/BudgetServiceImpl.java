@@ -48,6 +48,17 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
+    public Transaction getTransaction(long id) {
+        for (Map<Long, Transaction> transactionByMonth : transactions.values()) {
+            Transaction transaction = transactionByMonth.get(id);
+            if (transaction != null) {
+                return transaction;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public int getDailyBalance() {
         return DAILY_BUDGET * LocalDate.now().getDayOfMonth() - getAllSpend();
     }
